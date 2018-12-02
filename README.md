@@ -39,12 +39,15 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## DATABASE
 1.Create mysql db
+
 2.Import db file added in api/
 
 ## API
 PHP api created
 1.Add node
+
 2.Remove node
+
 3.Fetch node
 
 ## Learn More
