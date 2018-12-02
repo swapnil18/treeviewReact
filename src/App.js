@@ -1,27 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Tree from './Tree';
+import './App.css'; 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+  }
+
+  fetchTree= function() { //fetch tree list
+       fetch("http://localhost/tree/api/tree.php?action=list",{      
+         headers: {
+        },
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          //console.log(result);
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+       (error) => {
+          //console.log(error);
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+  componentDidMount() { //load tree 
+    this.fetchTree();
+  }
+
   render() {
+    const dataSource = this.state.items;
+    if (!dataSource) return null;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <Tree data={dataSource} parentCls={this}/>
+    )
   }
 }
 

@@ -30,3 +30,13 @@
     transform: rotate(360deg);
   }
 }
+
+ul {
+  padding-left: 20px;
+  list-style: none;
+}
+
+p {
+  font-weight: 600;
+  color: #541400;
+}
