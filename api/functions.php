@@ -67,11 +67,14 @@ class functions {
         if(empty($parent_id)) {
             return;
         }
-
-        $deleteChilds = "DELETE FROM treeitems WHERE parent_id = $parent_id";
+        $qlist=$this->db->FetchRecords("SELECT * FROM treeitems WHERE parent_id='$parent_id'");
+        if (count($qlist)>0) {
+            foreach ($qlist  as $value) {
+                $this->removeTreeNode($value['id']);    
+            }
+            
+        }
         $delete = "DELETE FROM treeitems WHERE id = $parent_id";
-         
-        $this->db->executeQuery($deleteChilds);
         $this->db->executeQuery($delete);
     }
 }
